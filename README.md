@@ -6,11 +6,11 @@ to check user supplied data that may be publicly displayed, such as usernames or
 <p align="center"><img src="assets/images/laravel-offensive-validation-rule-usage.png" alt="Laravel Offensive Validation Rule usage"></p>
 
 <p align="center">
-    <a href="https://travis-ci.org/DivineOmega/laravel-offensive-validation-rule">
-        <img src="https://travis-ci.org/DivineOmega/laravel-offensive-validation-rule.svg?branch=master">
+    <a href="https://travis-ci.org/Jord-JD/laravel-offensive-validation-rule">
+        <img src="https://travis-ci.org/Jord-JD/laravel-offensive-validation-rule.svg?branch=master">
     </a>
-    <a href='https://coveralls.io/github/DivineOmega/laravel-offensive-validation-rule?branch=master'>
-        <img src='https://coveralls.io/repos/github/DivineOmega/laravel-offensive-validation-rule/badge.svg?branch=master' alt='Coverage Status' />
+    <a href='https://coveralls.io/github/Jord-JD/laravel-offensive-validation-rule?branch=master'>
+        <img src='https://coveralls.io/repos/github/Jord-JD/laravel-offensive-validation-rule/badge.svg?branch=master' alt='Coverage Status' />
     </a>
     <a href="https://styleci.io/repos/132460621">
         <img src="https://styleci.io/repos/132460621/shield?branch=master" alt="StyleCI">
@@ -22,7 +22,7 @@ to check user supplied data that may be publicly displayed, such as usernames or
 To install, just run the following Composer command.
 
 ```
-composer require divineomega/laravel-offensive-validation-rule
+composer require jord-jd/laravel-offensive-validation-rule
 ```
 
 Please note that this package requires Laravel 5.5 or above.
