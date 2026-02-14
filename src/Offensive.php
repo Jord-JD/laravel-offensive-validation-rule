@@ -1,8 +1,8 @@
 <?php
 
-namespace DivineOmega\LaravelOffensiveValidationRule;
+namespace JordJD\LaravelOffensiveValidationRule;
 
-use DivineOmega\IsOffensive\OffensiveChecker;
+use JordJD\IsOffensive\OffensiveChecker;
 use Illuminate\Contracts\Validation\Rule;
 
 class Offensive implements Rule

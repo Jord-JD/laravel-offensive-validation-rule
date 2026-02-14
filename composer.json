@@ -19,12 +19,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "DivineOmega\\LaravelOffensiveValidationRule\\": "./src/"
+      "JordJD\\LaravelOffensiveValidationRule\\": "./src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "DivineOmega\\LaravelOffensiveValidationRule\\Tests\\": "./tests/"
+      "JordJD\\LaravelOffensiveValidationRule\\Tests\\": "./tests/"
     }
   },
   "replace": {

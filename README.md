@@ -32,7 +32,7 @@ Please note that this package requires Laravel 5.5 or above.
 The following code snippet shows an example of how to use the offensive validation rule.
 
 ```php
-use DivineOmega\LaravelOffensiveValidationRule\Offensive;
+use JordJD\LaravelOffensiveValidationRule\Offensive;
 
 $request->validate([
     'username' => ['required', new Offensive],
@@ -45,8 +45,8 @@ If the defaults are too strict (or not strict enough), you can optionally specif
 of offensive words and custom whitelist. Below is an example of using a custom blacklist and whitelist.
 
 ```php
-use DivineOmega\LaravelOffensiveValidationRule\Offensive;
-use DivineOmega\IsOffensive\OffensiveChecker;
+use JordJD\LaravelOffensiveValidationRule\Offensive;
+use JordJD\IsOffensive\OffensiveChecker;
 
 $blacklist = ['moist', 'stinky', 'poo'];
 $whitelist = ['poop'];

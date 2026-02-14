@@ -1,6 +1,6 @@
 <?php
 
-namespace DivineOmega\LaravelOffensiveValidationRule\Tests;
+namespace JordJD\LaravelOffensiveValidationRule\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace DivineOmega\LaravelOffensiveValidationRule\Tests\Unit;
+namespace JordJD\LaravelOffensiveValidationRule\Tests\Unit;
 
-use DivineOmega\IsOffensive\OffensiveChecker;
-use DivineOmega\LaravelOffensiveValidationRule\Offensive;
-use DivineOmega\LaravelOffensiveValidationRule\Tests\TestCase;
+use JordJD\IsOffensive\OffensiveChecker;
+use JordJD\LaravelOffensiveValidationRule\Offensive;
+use JordJD\LaravelOffensiveValidationRule\Tests\TestCase;
 
 class RuleTest extends TestCase
 {
