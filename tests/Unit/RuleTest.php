@@ -5,17 +5,17 @@ namespace DivineOmega\LaravelOffensiveValidationRule\Tests\Unit;
 use DivineOmega\IsOffensive\OffensiveChecker;
 use DivineOmega\LaravelOffensiveValidationRule\Offensive;
 use DivineOmega\LaravelOffensiveValidationRule\Tests\TestCase;
-use Validator;
 
 class RuleTest extends TestCase
 {
-    private function getValidator($value)
+    private function rulePasses(Offensive $rule, string $value): bool
     {
-        return Validator::make(['value' => $value], ['value' => new Offensive()]);
+        return $rule->passes('value', $value);
     }
 
     public function testOffensiveValues()
     {
+        $rule = new Offensive();
         $values = [
             'xxxSexyxxx',
             'Big-s-e-x-y',
@@ -30,12 +30,13 @@ class RuleTest extends TestCase
         ];
 
         foreach ($values as $value) {
-            $this->assertFalse($this->getValidator($value)->passes(), 'Failed asserting that \''.$value.'\' is offensive.');
+            $this->assertFalse($this->rulePasses($rule, $value), 'Failed asserting that \''.$value.'\' is offensive.');
         }
     }
 
     public function testNotOffensiveValues()
     {
+        $rule = new Offensive();
         $values = [
             'test',
             'user',
@@ -49,29 +50,30 @@ class RuleTest extends TestCase
         ];
 
         foreach ($values as $value) {
-            $this->assertTrue($this->getValidator($value)->passes(), 'Failed asserting that \''.$value.'\' is not offensive.');
+            $this->assertTrue($this->rulePasses($rule, $value), 'Failed asserting that \''.$value.'\' is not offensive.');
         }
     }
 
-    private function getCustomBlacklistAndWhitelistValidator($value)
+    private function getCustomRule(): Offensive
     {
         $blacklist = ['moist', 'stinky', 'poo'];
         $whitelist = ['poop'];
 
-        return Validator::make(['value' => $value], ['value' => new Offensive(new OffensiveChecker($blacklist, $whitelist))]);
+        return new Offensive(new OffensiveChecker($blacklist, $whitelist));
     }
 
     public function testCustomBlacklistAndWhitelist()
     {
+        $rule = $this->getCustomRule();
         $passingValues = ['cheese', 'poop', 'poops'];
         $failingValues = ['moist', 'moistness', 'stinky', 'poo', 'poos'];
 
         foreach ($passingValues as $value) {
-            $this->assertTrue($this->getCustomBlacklistAndWhitelistValidator($value)->passes());
+            $this->assertTrue($this->rulePasses($rule, $value));
         }
 
         foreach ($failingValues as $value) {
-            $this->assertFalse($this->getCustomBlacklistAndWhitelistValidator($value)->passes());
+            $this->assertFalse($this->rulePasses($rule, $value));
         }
     }
 }
