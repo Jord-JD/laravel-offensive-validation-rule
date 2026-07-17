@@ -12,9 +12,6 @@ to check user supplied data that may be publicly displayed, such as usernames or
     <a href='https://coveralls.io/github/Jord-JD/laravel-offensive-validation-rule?branch=master'>
         <img src='https://coveralls.io/repos/github/Jord-JD/laravel-offensive-validation-rule/badge.svg?branch=master' alt='Coverage Status' />
     </a>
-    <a href="https://styleci.io/repos/132460621">
-        <img src="https://styleci.io/repos/132460621/shield?branch=master" alt="StyleCI">
-    </a>
 </p>
 
 ## Installation
