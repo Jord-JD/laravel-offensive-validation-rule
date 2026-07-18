@@ -5,14 +5,7 @@ to check user supplied data that may be publicly displayed, such as usernames or
 
 <p align="center"><img src="assets/images/laravel-offensive-validation-rule-usage.png" alt="Laravel Offensive Validation Rule usage"></p>
 
-<p align="center">
-    <a href="https://travis-ci.org/Jord-JD/laravel-offensive-validation-rule">
-        <img src="https://travis-ci.org/Jord-JD/laravel-offensive-validation-rule.svg?branch=master">
-    </a>
-    <a href='https://coveralls.io/github/Jord-JD/laravel-offensive-validation-rule?branch=master'>
-        <img src='https://coveralls.io/repos/github/Jord-JD/laravel-offensive-validation-rule/badge.svg?branch=master' alt='Coverage Status' />
-    </a>
-</p>
+[![Tests](https://github.com/Jord-JD/laravel-offensive-validation-rule/actions/workflows/tests.yml/badge.svg)](https://github.com/Jord-JD/laravel-offensive-validation-rule/actions/workflows/tests.yml)
 
 ## Installation
 
@@ -22,7 +15,8 @@ To install, just run the following Composer command.
 composer require jord-jd/laravel-offensive-validation-rule
 ```
 
-Please note that this package requires Laravel 5.5 or above.
+The package supports Illuminate/Laravel 5.5 through 13 and PHP 7.1 through
+current PHP 8.x releases.
 
 ## Usage
 
@@ -33,6 +27,25 @@ use JordJD\LaravelOffensiveValidationRule\Offensive;
 
 $request->validate([
     'username' => ['required', new Offensive],
+]);
+```
+
+This rule only decides whether string content is offensive. Non-string values
+pass so Laravel rules such as `string`, `array`, or `integer` can report the
+appropriate type error. Objects with `__toString()` are checked as strings.
+
+### Custom validation message
+
+Pass an optional message as the second constructor argument. Laravel replaces
+`:attribute` as usual.
+
+```php
+$request->validate([
+    'username' => [
+        'required',
+        'string',
+        new Offensive(null, 'Please choose a different :attribute.'),
+    ],
 ]);
 ```
 
@@ -48,7 +61,10 @@ use JordJD\IsOffensive\OffensiveChecker;
 $blacklist = ['moist', 'stinky', 'poo'];
 $whitelist = ['poop'];
 
-$request->validate([
-    'username' => ['required', new Offensive(new OffensiveChecker($blacklist, $whitelist))],
-]);
+$rule = new Offensive(
+    new OffensiveChecker($blacklist, $whitelist),
+    'Please choose a different :attribute.'
+);
+
+$request->validate(['username' => ['required', 'string', $rule]]);
 ```
