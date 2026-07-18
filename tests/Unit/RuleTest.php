@@ -76,4 +76,40 @@ class RuleTest extends TestCase
             $this->assertFalse($this->rulePasses($rule, $value));
         }
     }
+
+    public function testNonStringValuesAreLeftToOtherValidationRules()
+    {
+        $rule = new Offensive();
+        $values = [null, 123, false, [], new \stdClass()];
+
+        foreach ($values as $value) {
+            $this->assertTrue($rule->passes('value', $value));
+        }
+    }
+
+    public function testStringableValuesAreChecked()
+    {
+        $value = new class() {
+            public function __toString()
+            {
+                return 'shitcrapper500';
+            }
+        };
+
+        $this->assertFalse((new Offensive())->passes('value', $value));
+    }
+
+    public function testValidationMessageCanBeCustomized()
+    {
+        $rule = new Offensive(null, 'Choose a different :attribute.');
+
+        $this->assertSame('Choose a different :attribute.', $rule->message());
+    }
+
+    public function testEmptyValidationMessageIsRejected()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        new Offensive(null, ' ');
+    }
 }

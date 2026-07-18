@@ -1,0 +1,36 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: PHP ${{ matrix.php }} / Illuminate ${{ matrix.illuminate }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '7.1'
+            illuminate: '^5.5'
+            phpunit: '^7.5'
+            composer: v2.2
+          - php: '8.5'
+            illuminate: '^13.0'
+            phpunit: '^12.5'
+            composer: latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:${{ matrix.composer }}
+          coverage: none
+      - run: composer require illuminate/contracts:${{ matrix.illuminate }} --no-update --no-interaction
+      - run: composer require --dev phpunit/phpunit:${{ matrix.phpunit }} --no-update --no-interaction
+      - run: composer update --with-all-dependencies --prefer-dist --no-interaction --no-progress
+      - run: vendor/bin/phpunit
